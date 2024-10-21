@@ -26,7 +26,7 @@ jobs:
         with:
           context: "{{defaultContext}}:sdv-web"
           push: true
-          tags: web_dev:latest
+          tags: container-joke:latest
       -
         name: Build and push image api dev
         uses: docker/build-push-action@v6
