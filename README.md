@@ -1,49 +1,56 @@
-# Sup de Vinci - Containers module project
+# Sup de Vinci - Projet Containers
 
-*Tested with `rust v1.82.0` et `node 23.0.0`.*
+Ce projet consiste à créer une application appelée "Joke of the Day" qui se compose d'une API construite avec Rust et d'une application front-end développée avec Next.js. 
 
-## Development
+## Prérequis
 
-### API
+Avant de commencer, assurez-vous d'avoir installé Docker et Docker Compose sur votre machine.
 
-#### Basics
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-Use `cargo run` to start the dev environment.
+## Lancement des Conteneurs
 
-You can also install [cargo-watch](https://crates.io/crates/cargo-watch) to watche over your project's source for changes, and runs Cargo commands when they occur : `cargo-watch -x run`.
+Pour démarrer les conteneurs pour l'application API et le front-end, suivez ces étapes :
 
-#### Using Docker
+1. **Clonez le dépôt** :
 
-> TODO
+   ```bash
+   git clone https://github.com/votre-utilisateur/sdv-m1do-containers-project.git
+   cd sdv-m1do-containers-project
 
-### Web
+2. **Construisez et lancez les conteneurs** :
 
-#### Basics
+  Dans le répertoire racine de votre projet, exécutez la commande suivante pour démarrer Docker Compose :
 
-Use `npm install` to install all dependancies, and `npm run dev` to start the dev environment.
+    ```bash
+    docker-compose up --build
+  
+  Cette commande va construire les images Docker pour l'API et le front-end, puis démarrer les conteneurs.
 
-#### Using Docker
+3. **Accéder à l'application** :
 
-> TODO
+   Une fois les conteneurs lancés, vous pouvez accéder à l'application front-end à l'adresse suivante :
 
-## Production
+   http://localhost:3000
 
-### API
+## Dans le cas d'une MAJ du code :
 
-#### Basics
+Lorsqu'un changement est effectué dans le code source, vous devez relancer Docker Compose pour appliquer les modifications. Voici comment procéder :
 
-Run `cargo build --release` to build and compile the app. This will create an executable in `/target/release/sdv-api`.
+1. **Arrêt des conteneurs** :
 
-#### Using Docker
+Vous pouvez le faire en utilisant Ctrl + C dans le terminal où Docker Compose est en cours d'exécution.
 
-> TODO
+2. **Relancez Docker Compose** :
 
-### Web
+   Exécutez la même commande qu'auparavant pour reconstruire et relancer les conteneurs :
 
-#### Basics
+     ```bash
+    docker-compose up --build
 
-Run `npm run build` to build the application, and run `npm run start` to start the Node.js server. 
+## Déploiement des Images Docker :
 
-#### Using Docker
+Lors d'un push vers le repository git distant sur la branche MAIN l'image est automatiquement créé vous les retrouverez sur le repository suivant :
 
-> TODO
+https://hub.docker.com/repository/docker/gyosei/container-joke
