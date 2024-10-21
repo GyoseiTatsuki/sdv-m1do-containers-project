@@ -23,7 +23,7 @@ Pour démarrer les conteneurs pour l'application API et le front-end, suivez ces
 
   Dans le répertoire racine de votre projet, exécutez la commande suivante pour démarrer Docker Compose :
 
-    ```bash
+   ```bash
     docker-compose up --build
   
   Cette commande va construire les images Docker pour l'API et le front-end, puis démarrer les conteneurs.
