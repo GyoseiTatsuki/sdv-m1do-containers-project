@@ -1,36 +1,35 @@
-name: ci
+    services:
+      docker:
+        image: docker:19.03.12
+        options: >-
+          --privileged
+          --group-add docker
 
-on:
-  push:
-    branches: [ "main" ]
-
-jobs:
-  docker:
-    runs-on: ubuntu-latest
     steps:
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push image web dev
-        uses: docker/build-push-action@v6
-        with:
-          context: "{{defaultContext}}:sdv-web"
-          push: true
-          tags: container-joke:latest
-      -
-        name: Build and push image api dev
-        uses: docker/build-push-action@v6
-        with:
-          context: "{{defaultContext}}:sdv-api"
-          push: true
-          tags: api_dev:latest
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Build and push sdv-web
+      uses: docker/build-push-action@v3
+      with:
+        context: ./sdv-web
+        file: ./sdv-web/Dockerfile
+        tags: container-joke/sdv-web:latest
+        push: true
+
+    - name: Build and push sdv-api
+      uses: docker/build-push-action@v3
+      with:
+        context: ./sdv-api
+        file: ./sdv-api/Dockerfile
+        tags: container-joke/sdv-api:latest
+        push: true
